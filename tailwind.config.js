@@ -13,16 +13,18 @@ module.exports = {
         "2xl": "3rem",
       },
     },
-    extend: {
-      colors: {
-        navy: "#263B50",
-        cream: "#F3EDE0",
-      },
-      fontFamily: {
-        body: ['"ChefPalatino"', '"Palatino Linotype"', '"Book Antiqua"', "Palatino", "Georgia", "serif"],
-        heading: ['"ChefHeading"', "ui-sans-serif", "system-ui", "Segoe UI", "Roboto", "Arial", "sans-serif"],
-      },
-    },
+   // tailwind.config.js
+extend: {
+  colors: {
+    navy: "#263B50",
+    cream: "#F3EDE0",
+  },
+  fontFamily: {
+    body: ['"ChefPalatino"', '"Palatino Linotype"', '"Book Antiqua"', "Palatino", "Georgia", "serif"],
+    heading: ['"ChefPalatino"', '"Palatino Linotype"', '"Book Antiqua"', "Palatino", "Georgia", "serif"],
+    display: ['"ChefHeading"', "sans-serif"], // <-- your Relation Two Bold (special headers only)
+  },
+}
   },
   plugins: [],
 };
