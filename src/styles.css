@@ -1,3 +1,8 @@
+/* Improve font rendering & base elements */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+img { display: block; max-width: 100%; }
+
+
 @font-face {
   font-family: 'Brittany';
   src: url('/fonts/Brittany.ttf') format('truetype');
@@ -12,3 +17,10 @@
 
 :root { --brand-navy:#263B50; --brand-cream:#F3EDE0; }
 .container-xl { @apply max-w-6xl mx-auto px-4; }
+
+/* Accessible focus fallback on anchors/buttons if Tailwind classes are missing */
+a:focus-visible, button:focus-visible { outline: 2px solid rgba(243,237,224,0.8); outline-offset: 2px; }
+
+/* Card helpers for equal heights */
+.card { @apply bg-white/70 rounded-2xl p-6 shadow flex flex-col; }
+.card-body { @apply flex-1; }
