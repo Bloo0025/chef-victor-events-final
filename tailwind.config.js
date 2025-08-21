@@ -1,25 +1,28 @@
-export default {
-  content: ['./index.html','./src/**/*.{js,jsx,ts,tsx}'],
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  darkMode: "class",
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1.25rem",
+        lg: "2rem",
+        xl: "2.5rem",
+        "2xl": "3rem",
+      },
+    },
     extend: {
       colors: {
-        navy: '#263B50',
-        cream: '#F3EDE0',
+        navy: "#263B50",
+        cream: "#F3EDE0",
       },
       fontFamily: {
-        display: ['Brittany','ui-sans-serif','system-ui','Segoe UI','Roboto','sans-serif'],
-        body: ['ui-sans-serif','system-ui','Segoe UI','Roboto','sans-serif'],
-      },
-      keyframes: {
-        fadeInUp: {
-          '0%': { opacity: 0, transform: 'translateY(20px)' },
-          '100%': { opacity: 1, transform: 'translateY(0)' },
-        },
-      },
-      animation: {
-        fadeInUp: 'fadeInUp 0.8s ease-out forwards',
+        body: ['"ChefPalatino"', '"Palatino Linotype"', '"Book Antiqua"', "Palatino", "Georgia", "serif"],
+        heading: ['"ChefHeading"', "ui-sans-serif", "system-ui", "Segoe UI", "Roboto", "Arial", "sans-serif"],
       },
     },
   },
   plugins: [],
-}
+};

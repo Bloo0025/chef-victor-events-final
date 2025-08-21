@@ -1,26 +1,89 @@
-/* Improve font rendering & base elements */
-html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-img { display: block; max-width: 100%; }
+/* ===========================
+   Global Styles (Tailwind + Custom Fonts)
+   =========================== */
 
-
+/* --- Heading font: Relation Two Bold (.otf) --- */
 @font-face {
-  font-family: 'Brittany';
-  src: url('/fonts/Brittany.ttf') format('truetype');
-  font-weight: 400;
+  font-family: "ChefHeading";
+  src: url("/fonts/heading/relation-two-bold.otf") format("opentype");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
+/* --- Body font: Palatino Linotype (.ttf) --- */
+@font-face {
+  font-family: "ChefPalatino";
+  src: url("/fonts/palatino/palatinolinotype_roman.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ChefPalatino";
+  src: url("/fonts/palatino/palatinolinotype_italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ChefPalatino";
+  src: url("/fonts/palatino/palatinolinotype_bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ChefPalatino";
+  src: url("/fonts/palatino/palatinolinotype_bolditalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* --- Tailwind layers --- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root { --brand-navy:#263B50; --brand-cream:#F3EDE0; }
-.container-xl { @apply max-w-6xl mx-auto px-4; }
+/* --- Base resets & typography (Palatino body + Relation Two headings) --- */
+@layer base {
+  /* Body uses Palatino */
+  html {
+    font-family: theme('fontFamily.body');
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 
-/* Accessible focus fallback on anchors/buttons if Tailwind classes are missing */
-a:focus-visible, button:focus-visible { outline: 2px solid rgba(243,237,224,0.8); outline-offset: 2px; }
+  /* Comfortable reading rhythm for serif body */
+  body { @apply leading-relaxed md:leading-loose; }
 
-/* Card helpers for equal heights */
-.card { @apply bg-white/70 rounded-2xl p-6 shadow flex flex-col; }
-.card-body { @apply flex-1; }
+  /* All headings use Relation Two Bold */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: theme('fontFamily.heading');
+    @apply font-bold;
+  }
+
+  /* Sensible defaults; Tailwind utilities still override these */
+  h1 { @apply leading-tight tracking-tight; font-size: clamp(2rem, 4vw + 0.5rem, 3rem);  margin-block: 0.6em 0.35em; }
+  h2 { @apply leading-tight tracking-tight; font-size: clamp(1.5rem, 3vw + 0.25rem, 2.25rem); margin-block: 0.7em 0.4em; }
+  h3 { @apply leading-snug  tracking-tight; font-size: clamp(1.25rem, 2vw + 0.2rem, 1.75rem);  margin-block: 0.8em 0.45em; }
+  h4, h5, h6 { @apply leading-snug; margin-block: 0.85em 0.5em; }
+
+  /* Body italics use Palatino italic automatically */
+  em, i { font-style: italic; }
+
+  /* Optional: keep your script logo */
+  .logo-script { font-family: "Brittany", cursive; }
+}
+
+/* --- Components layer (add your custom component styles here) --- */
+@layer components {
+  /* .btn-primary { @apply bg-[#263B50] text-white rounded-2xl px-5 py-3 shadow-sm; } */
+}
+
+/* --- Utilities layer for one-off helpers (optional) --- */
+@layer utilities {
+  /* .text-shadow { text-shadow: 0 1px 1px rgba(0,0,0,.15); } */
+}
