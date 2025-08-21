@@ -1,0 +1,400 @@
+diff --git a/src/App.jsx b/src/App.jsx
+index 0000000..1111111 100644
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -1,16 +1,25 @@
+ import { Outlet } from 'react-router-dom'
+ import Navbar from './components/Navbar'
+ import Footer from './components/Footer'
+ 
+ export default function App() {
+   return (
+-    <div className="min-h-screen flex flex-col bg-cream text-navy font-body">
+-      <Navbar />
+-      <main className="flex-1">
+-        <Outlet />
+-      </main>
+-      <Footer />
+-    </div>
++    <div className="min-h-screen flex flex-col bg-cream text-navy font-body">
++      {/* Skip link for accessibility */}
++      <a
++        href="#main-content"
++        className="sr-only focus:not-sr-only fixed top-2 left-2 z-[100] bg-navy text-cream px-4 py-2 rounded shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-cream/80"
++      >
++        Skip to content
++      </a>
++
++      <Navbar />
++
++      <main id="main-content" className="flex-1" role="main">
++        <Outlet />
++      </main>
++
++      <Footer />
++    </div>
+   )
+ }
+diff --git a/src/components/Navbar.jsx b/src/components/Navbar.jsx
+index 2222222..3333333 100644
+--- a/src/components/Navbar.jsx
++++ b/src/components/Navbar.jsx
+@@ -1,23 +1,23 @@
+ import { NavLink, useNavigate } from 'react-router-dom'
+ 
+-const linkBase = 'px-4 py-2 rounded-xl hover:bg-navy/10 transition'
++const linkBase = 'px-3 md:px-4 py-2 rounded-xl text-cream/90 hover:text-cream hover:bg-cream/10 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-cream/60'
+ 
+ export default function Navbar() {
+   const navigate = useNavigate()
+   return (
+     <header className="sticky top-0 z-50 bg-navy border-b border-navy/10 backdrop-blur-sm shadow">
+       <div className="container-xl flex items-center justify-between py-4">
+         <button onClick={() => navigate('/')} className="flex items-center gap-3 text-3xl md:text-4xl font-display font-semibold tracking-wide text-cream">
+           <img src="/images/logo.png" alt="Chef Victor Events Logo" className="h-14 w-auto" />
+           Chef Victor Events
+         </button>
+-        <nav className="flex gap-1 text-sm md:text-base text-cream">
++        <nav aria-label="Primary" className="flex gap-1 text-sm md:text-base text-cream">
+           <NavLink to="/" className={({isActive}) => `${linkBase} ${isActive ? 'bg-cream text-navy underline underline-offset-4 font-semibold' : ''}`}>Home</NavLink>
+           <NavLink to="/catering" className={({isActive}) => `${linkBase} ${isActive ? 'bg-cream text-navy underline underline-offset-4 font-semibold' : ''}`}>Catering</NavLink>
+           <a href="https://rollatinirestaurant.com/" className={linkBase} rel="noopener" target="_blank">Restaurant</a>
+           <NavLink to="/venues" className={({isActive}) => `${linkBase} ${isActive ? 'bg-cream text-navy underline underline-offset-4 font-semibold' : ''}`}>Venues</NavLink>
+           <NavLink to="/gallery" className={({isActive}) => `${linkBase} ${isActive ? 'bg-cream text-navy underline underline-offset-4 font-semibold' : ''}`}>Gallery</NavLink>
+           <NavLink to="/contact" className={({isActive}) => `${linkBase} ${isActive ? 'bg-cream text-navy underline underline-offset-4 font-semibold' : ''}`}>Contact</NavLink>
+         </nav>
+       </div>
+     </header>
+   )
+ }
+diff --git a/src/components/Footer.jsx b/src/components/Footer.jsx
+index 4444444..5555555 100644
+--- a/src/components/Footer.jsx
++++ b/src/components/Footer.jsx
+@@ -1,23 +1,54 @@
+ export default function Footer() {
+   return (
+-    <footer className="border-t border-navy/10 mt-12">
+-      <div className="container-xl py-8 text-sm grid gap-2 md:grid-cols-3">
+-        <div>
+-          <p className="font-semibold">Chef Victor Events</p>
+-          <p className="opacity-80">Est. 2006 • Treasure Coast & South Florida</p>
+-        </div>
+-        <div className="opacity-80">Licensed & insured • Full‑service catering</div>
+-        <div className="text-right opacity-80">© {new Date().getFullYear()} Chef Victor Events</div>
+-      </div>
+-    </footer>
++    <footer className="mt-16 bg-navy text-cream">
++      <div className="container-xl py-10 grid gap-6 md:grid-cols-3">
++        <div className="space-y-1">
++          <p className="text-lg font-semibold">Chef Victor Events</p>
++          <p className="opacity-80 text-sm">Est. 2006 • Treasure Coast & South Florida</p>
++        </div>
++
++        <div className="space-y-2">
++          <a
++            href="mailto:Rollatini1@gmail.com"
++            className="inline-block underline underline-offset-4 decoration-cream/60 hover:decoration-cream"
++            aria-label="Email us at Rollatini1@gmail.com"
++          >
++            Rollatini1@gmail.com
++          </a>
++          <div>
++            <a
++              href="https://www.instagram.com/"
++              target="_blank"
++              rel="noopener"
++              aria-label="Visit our Instagram"
++              className="inline-flex items-center gap-2 group"
++            >
++              {/* Instagram icon with official gradient */}
++              <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
++                <defs>
++                  <linearGradient id="igGrad" x1="0%" y1="0%" x2="100%" y2="100%">
++                    <stop offset="0%" stop-color="#f58529"/>
++                    <stop offset="50%" stop-color="#dd2a7b"/>
++                    <stop offset="100%" stop-color="#8134af"/>
++                  </linearGradient>
++                </defs>
++                <path fill="url(#igGrad)" d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm5 2a6 6 0 100 12 6 6 0 000-12zm0 2a4 4 0 110 8 4 4 0 010-8zm6.5-.75a1.25 1.25 0 11-2.5 0 1.25 1.25 0 012.5 0z"/>
++              </svg>
++              <span className="underline underline-offset-4 decoration-transparent group-hover:decoration-cream/70">
++                Instagram
++              </span>
++            </a>
++          </div>
++        </div>
++
++        <div className="md:text-right opacity-80 text-sm self-end">
++          © {new Date().getFullYear()} Chef Victor Events
++        </div>
++      </div>
++    </footer>
+   )
+ }
+diff --git a/src/styles.css b/src/styles.css
+index 6666666..7777777 100644
+--- a/src/styles.css
++++ b/src/styles.css
+@@ -1,16 +1,37 @@
++/* Improve font rendering & base elements */
++html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
++img { display: block; max-width: 100%; }
++
+ @font-face {
+   font-family: 'Brittany';
+   src: url('/fonts/Brittany.ttf') format('truetype');
+   font-weight: 400;
+   font-style: normal;
+   font-display: swap;
+ }
+ 
+ @tailwind base;
+ @tailwind components;
+ @tailwind utilities;
+ 
+ :root { --brand-navy:#263B50; --brand-cream:#F3EDE0; }
+ .container-xl { @apply max-w-6xl mx-auto px-4; }
++
++/* Accessible focus fallback on anchors/buttons if Tailwind classes are missing */
++a:focus-visible, button:focus-visible { outline: 2px solid rgba(243,237,224,0.8); outline-offset: 2px; }
++
++/* Helper for equal card heights (wrap applies to child) */
++.card { @apply bg-white/70 rounded-2xl p-6 shadow flex flex-col; }
++.card-body { @apply flex-1; }
+diff --git a/src/pages/Home.jsx b/src/pages/Home.jsx
+index 8888888..9999999 100644
+--- a/src/pages/Home.jsx
++++ b/src/pages/Home.jsx
+@@ -1,48 +1,53 @@
+ export default function Home() {
+   return (
+     <section>
+-      {/* HERO ROW */}
+-      <div className="container-xl pt-14 pb-0 grid gap-8 md:grid-cols-2 items-center relative z-10 min-h-screen">
+-        {/* Narrowed, centered text column */}
+-        <div className="flex flex-col justify-center space-y-6 max-w-xl w-full md:pr-6">
++      {/* HERO ROW */}
++      <div className="container-xl pt-10 md:pt-14 pb-0 grid gap-6 md:gap-8 md:grid-cols-2 items-start md:items-center relative z-10 min-h-screen">
++        {/* Narrow, slightly higher on mobile */}
++        <div className="flex flex-col justify-center space-y-6 max-w-xl w-full md:pr-6 mt-6 md:mt-0">
+           <h1 className="text-5xl md:text-6xl font-display leading-tight">
+             What We Believe In
+           </h1>
+-          <p className="text-xl md:text-2xl opacity-90 leading-relaxed">
++          <p className="text-xl md:text-2xl opacity-90 leading-relaxed">
+             For over 20 years, we’ve curated exceptional catering and elevated events with sophistication, style, and impeccable taste.
+             Trusted for our flawless execution and refined service, we turn every occasion into an unforgettable experience.
+           </p>
+         </div>
+ 
+-        {/* Full-height hero image */}
+-        <div className="relative min-h-screen">
++        {/* Full-height hero image */}
++        <div className="relative min-h-[70vh] md:min-h-screen">
+           <img
+             src="/images/hero.jpg"
+             alt="Chef Victor Events"
+             className="h-full w-full object-cover"
+           />
+         </div>
+       </div>
+ 
+-      {/* FULL-WIDTH "WHAT WE DO" SECTION WITH LARGE OVERLAP */}
+-      <div className="container-xl relative z-20 -mt-[35vh]">
++      {/* FULL-WIDTH "WHAT WE DO" SECTION WITH RESPONSIVE OVERLAP */}
++      <div className="container-xl relative z-20 -mt-[20vh] md:-mt-[30vh] lg:-mt-[35vh]">
+         <div className="rounded-3xl bg-cream shadow-xl border border-navy/10 p-8 md:p-12">
+           <h2 className="text-4xl md:text-5xl font-display text-navy text-center">
+             What We Do
+           </h2>
+ 
+-          <div className="mt-8 grid gap-8 md:grid-cols-3 text-navy/90">
+-            <div className="space-y-3">
++          <div className="mt-8 grid gap-6 md:gap-8 md:grid-cols-3 text-navy/90">
++            <div className="space-y-3">
+               <h3 className="text-xl md:text-2xl font-semibold">Catering</h3>
+               <p className="text-lg leading-relaxed">
+                 We provide full-service catering with a chef-curated menu featuring a wide variety of cuisines and custom dishes tailored to any event or taste.
+               </p>
+             </div>
+ 
+-            <div className="space-y-3">
++            <div className="space-y-3">
+               <h3 className="text-xl md:text-2xl font-semibold">Restaurant</h3>
+               <p className="text-lg leading-relaxed">
+                 Our Italian restaurant is a cozy, welcoming spot where families and friends gather to enjoy pastas, classic comfort dishes, and the heartwarming flavors of Italy.
+               </p>
+             </div>
+ 
+-            <div className="space-y-3">
++            <div className="space-y-3">
+               <h3 className="text-xl md:text-2xl font-semibold">Our Venues</h3>
+               <p className="text-lg leading-relaxed">
+                 We offer a collection of beautiful venues across the Treasure Coast and South Florida, perfect for weddings, celebrations, and events of all kinds—each with its own unique charm and style.
+               </p>
+             </div>
+           </div }
+@@ -54,6 +59,7 @@ export default function Home() {
+           <div className="mt-10 text-center">
+             <a
+               href="/contact"
++              aria-label="Contact us"
+               className="inline-block px-8 py-4 text-lg font-semibold text-cream bg-navy rounded-xl shadow hover:bg-navy/90 transition"
+             >
+               Contact Us
+diff --git a/src/pages/Catering.jsx b/src/pages/Catering.jsx
+index aaaaaaa..bbbbbbb 100644
+--- a/src/pages/Catering.jsx
++++ b/src/pages/Catering.jsx
+@@ -1,40 +1,44 @@
+ import Slideshow from '../components/Slideshow'
+ 
+ export default function Catering() {
+   return (
+-    <section className="container-xl py-12 space-y-10">
++    <section className="container-xl py-12 space-y-10">
+       <header className="text-center max-w-3xl mx-auto space-y-2">
+         <h2 className="text-3xl md:text-4xl font-display">Catering</h2>
+         <p className="opacity-80">Weddings • Corporate • Social • Food Stations • Take‑out Trays</p>
+       </header>
+ 
+-      <div className="grid md:grid-cols-3 gap-6">
+-        <div className="space-y-2">
++      <div className="grid md:grid-cols-3 gap-6 items-stretch">
++        <div className="card">
+           <h3 className="text-xl font-semibold">Weddings</h3>
+-          <p className="opacity-80">Custom menus, elegant plated dinners, or relaxed buffet‑style service—seamless and memorable.</p>
+-          <Slideshow images={["/images/weddings/1.jpg","/images/weddings/2.jpg","/images/weddings/3.jpg"]} className="aspect-[4/3]" />
++          <p className="opacity-80 card-body">Custom menus, elegant plated dinners, or relaxed buffet‑style service—seamless and memorable.</p>
++          <Slideshow images={["/images/weddings/1.jpg","/images/weddings/2.jpg","/images/weddings/3.jpg"]} className="aspect-[4/3]" label="Weddings slideshow" />
+         </div>
+-        <div className="space-y-2">
++        <div className="card">
+           <h3 className="text-xl font-semibold">Corporate</h3>
+-          <p className="opacity-80">Flexible options from refined plated meals to convenient buffet setups for meetings and conferences.</p>
+-          <Slideshow images={["/images/corporate/1.jpg","/images/corporate/2.jpg","/images/corporate/3.jpg"]} className="aspect-[4/3]" />
++          <p className="opacity-80 card-body">Flexible options from refined plated meals to convenient buffet setups for meetings and conferences.</p>
++          <Slideshow images={["/images/corporate/1.jpg","/images/corporate/2.jpg","/images/corporate/3.jpg"]} className="aspect-[4/3]" label="Corporate slideshow" />
+         </div>
+-        <div className="space-y-2">
++        <div className="card">
+           <h3 className="text-xl font-semibold">Social</h3>
+-          <p className="opacity-80">From formal occasions to fun, casual parties—tailored to make your celebration special.</p>
+-          <Slideshow images={["/images/social/1.jpg","/images/social/2.jpg","/images/social/3.jpg"]} className="aspect-[4/3]" />
++          <p className="opacity-80 card-body">From formal occasions to fun, casual parties—tailored to make your celebration special.</p>
++          <Slideshow images={["/images/social/1.jpg","/images/social/2.jpg","/images/social/3.jpg"]} className="aspect-[4/3]" label="Social slideshow" />
+         </div>
+       </div }
+ 
+       <div className="bg-navy text-cream rounded-3xl p-6 grid md:grid-cols-2 gap-6 items-center">
+         <div>
+           <h3 className="text-2xl font-semibold">Food Stations</h3>
+           <p className="mt-2 opacity-90">A unique, interactive way to offer various cuisines. Popular stations include Charcuterie, Taco, Carving, Pasta, Pizza, Sliders, and Mini Desserts.</p>
+         </div>
+-        <Slideshow images={["/images/stations/1.jpg","/images/stations/2.jpg","/images/stations/3.jpg"]} className="aspect-[4/3]" />
++        <Slideshow images={["/images/stations/1.jpg","/images/stations/2.jpg","/images/stations/3.jpg"]} className="aspect-[4/3]" label="Food stations slideshow" />
+       </div }
+ 
+       <div className="text-center space-y-3">
+-        <a href="#" className="inline-block px-6 py-3 bg-navy text-cream rounded-xl shadow hover:opacity-90">View Menu / Order Trays</a>
++        <a href="#" className="inline-block px-6 py-3 bg-navy text-cream rounded-xl shadow hover:opacity-90" aria-label="View menu or order trays">
++          View Menu / Order Trays
++        </a>
+         <p className="opacity-70 text-sm">We also do take‑out and drop‑off trays for your events.</p>
+       </div }
+     </section }
+   )
+ }
+diff --git a/src/pages/Venues.jsx b/src/pages/Venues.jsx
+index ccccccc..ddddddd 100644
+--- a/src/pages/Venues.jsx
++++ b/src/pages/Venues.jsx
+@@ -1,27 +1,27 @@
+ import Slideshow from '../components/Slideshow'
+ 
+ export default function Venues() {
+   return (
+-    <section className="container-xl py-12 space-y-10">
++    <section className="container-xl py-12 space-y-10">
+       <header className="max-w-3xl space-y-2">
+         <h2 className="text-3xl md:text-4xl font-display">Our Venues</h2>
+         <p className="opacity-80">A collection across the Treasure Coast & South Florida. (Madison Green removed by request.)</p>
+       </header }
+ 
+-      <div className="grid md:grid-cols-2 gap-8 items-start">
+-        <div className="space-y-2">
++      <div className="grid md:grid-cols-2 gap-8 items-stretch">
++        <div className="card">
+           <h3 className="text-xl font-semibold">Promenade on the River</h3>
+-          <p className="opacity-80">Located in Port St. Lucie. Two floors with a luxurious riverfront setting for grand events.</p>
+-          <Slideshow images={["/images/venues/promenade/1.jpg","/images/venues/promenade/2.jpg","/images/venues/promenade/3.jpg"]} className="aspect-[4/3]" />
++          <p className="opacity-80 card-body">Located in Port St. Lucie. Two floors with a luxurious riverfront setting for grand events.</p>
++          <Slideshow images={["/images/venues/promenade/1.jpg","/images/venues/promenade/2.jpg","/images/venues/promenade/3.jpg"]} className="aspect-[4/3]" label="Promenade on the River slideshow" />
+         </div>
+-        <div className="space-y-2">
++        <div className="card">
+           <h3 className="text-xl font-semibold">Emerald Hills</h3>
+-          <p className="opacity-80">In the heart of Hollywood, FL—an intimate setting with beautiful views of the golf course.</p>
+-          <Slideshow images={["/images/venues/emerald/1.jpg","/images/venues/emerald/2.jpg","/images/venues/emerald/3.jpg"]} className="aspect-[4/3]" />
++          <p className="opacity-80 card-body">In the heart of Hollywood, FL—an intimate setting with beautiful views of the golf course.</p>
++          <Slideshow images={["/images/venues/emerald/1.jpg","/images/venues/emerald/2.jpg","/images/venues/emerald/3.jpg"]} className="aspect-[4/3]" label="Emerald Hills slideshow" />
+         </div }
+       </div }
+     </section }
+   )
+ }
+diff --git a/src/components/Slideshow.jsx b/src/components/Slideshow.jsx
+index eeeeeee..fffffff 100644
+--- a/src/components/Slideshow.jsx
++++ b/src/components/Slideshow.jsx
+@@ -1,34 +1,41 @@
+ import { useEffect, useState } from 'react'
+ 
+-export default function Slideshow({ images = [], alt = 'gallery slide', className = '' }) {
++export default function Slideshow({ images = [], alt = 'gallery slide', className = '', label = 'Image slideshow' }) {
+   const [index, setIndex] = useState(0)
+ 
+   useEffect(() => {
+     if (!images.length) return
+     const id = setInterval(() => setIndex((i) => (i + 1) % images.length), 2000)
+     return () => clearInterval(id)
+   }, [images.length])
+ 
+   if (!images.length) return null
+ 
+   return (
+-    <div className={`relative overflow-hidden rounded-2xl shadow ${className}`}>
+-      {images.map((src, i) => (
+-        <img
+-          key={src + i}
+-          src={src}
+-          alt={alt}
+-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${i === index ? 'opacity-100' : 'opacity-0'}`}
+-          loading={i === index ? 'eager' : 'lazy'}
+-        />
+-      ))}
+-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
++    <div
++      className={`relative overflow-hidden rounded-2xl shadow ${className}`}
++      role="region"
++      aria-label={label}
++      aria-live="polite"
++    >
++      {images.map((src, i) => (
++        <img
++          key={src + i}
++          src={src}
++          alt={alt}
++          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${i === index ? 'opacity-100' : 'opacity-0'}`}
++          loading={i === index ? 'eager' : 'lazy'}
++        />
++      ))}
++      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1" aria-hidden="true">
+         {images.map((_, i) => (
+           <span key={i} className={`h-1.5 w-4 rounded-full ${i === index ? 'bg-navy' : 'bg-navy/30'}`}></span>
+         ))}
+       </div>
+     </div>
+   )
+ }

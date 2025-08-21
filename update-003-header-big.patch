@@ -1,0 +1,15 @@
+diff --git a/src/components/Navbar.jsx b/src/components/Navbar.jsx
+index 4444444..5555555 100644
+--- a/src/components/Navbar.jsx
++++ b/src/components/Navbar.jsx
+@@ export default function Navbar() {
+-    <header className="sticky top-0 z-50 bg-navy border-b border-navy/10 backdrop-blur-sm shadow">
+-      <div className="container-xl flex items-center justify-between py-3">
+-        <button onClick={() => navigate('/')} className="flex items-center gap-3 text-3xl md:text-4xl font-display font-semibold tracking-wide text-cream">
+-          <img src="/images/logo.png" alt="Chef Victor Events Logo" className="h-12 w-auto" />
++    <header className="sticky top-0 z-50 bg-navy border-b border-navy/10 backdrop-blur-sm shadow-lg">
++      <div className="container-xl flex items-center justify-between py-6 md:py-8">
++        <button onClick={() => navigate('/')} className="flex items-center gap-4 text-4xl md:text-5xl font-display font-semibold tracking-wide text-cream">
++          <img src="/images/logo.png" alt="Chef Victor Events Logo" className="h-20 w-auto" />
+           Chef Victor Events
+         </button>

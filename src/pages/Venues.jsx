@@ -3,21 +3,64 @@ import Slideshow from '../components/Slideshow'
 export default function Venues() {
   return (
     <section className="container-xl py-12 space-y-10">
-      <header className="max-w-3xl space-y-2">
-        <h2 className="text-3xl md:text-4xl font-display">Our Venues</h2>
-        <p className="opacity-80">A collection across the Treasure Coast & South Florida. (Madison Green removed by request.)</p>
+      <header className="text-center max-w-3xl mx-auto space-y-8">
+        <h2 className="text-6xl md:text-7xl font-display text-[#263B50]">
+          Venues
+        </h2>
+        <p className="opacity-80 text-lg md:text-xl">
+          Elegant settings for weddings, corporate events, and special celebrations
+        </p>
       </header>
 
-      <div className="grid md:grid-cols-2 gap-8 items-start">
-        <div className="space-y-2">
-          <h3 className="text-xl font-semibold">Promenade on the River</h3>
-          <p className="opacity-80">Located in Port St. Lucie. Two floors with a luxurious riverfront setting for grand events.</p>
-          <Slideshow images={["/images/venues/promenade/1.jpg","/images/venues/promenade/2.jpg","/images/venues/promenade/3.jpg"]} className="aspect-[4/3]" />
+      <div className="grid md:grid-cols-2 gap-8 items-stretch">
+        <div className="card">
+          <h3 className="text-xl font-semibold">
+            <a
+              href="https://www.promenadeontheriverllc.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline hover:text-navy transition-colors"
+            >
+              Promenade on the River
+            </a>
+          </h3>
+          <p className="opacity-80 card-body">
+            Located in Port St. Lucie. Two floors with a luxurious riverfront setting for grand events.
+          </p>
+          <Slideshow
+            images={[
+              "/images/venues/promenade/Prom1.jpeg",
+              "/images/venues/promenade/Prom2.JPG",
+              "/images/venues/promenade/Prom3.JPG"
+            ]}
+            className="aspect-[4/3]"
+            label="Promenade on the River slideshow"
+          />
         </div>
-        <div className="space-y-2">
-          <h3 className="text-xl font-semibold">Emerald Hills</h3>
-          <p className="opacity-80">In the heart of Hollywood, FL—an intimate setting with beautiful views of the golf course.</p>
-          <Slideshow images={["/images/venues/emerald/1.jpg","/images/venues/emerald/2.jpg","/images/venues/emerald/3.jpg"]} className="aspect-[4/3]" />
+
+        <div className="card">
+          <h3 className="text-xl font-semibold">
+            <a
+              href="https://www.theclubatemeraldhills.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline hover:text-navy transition-colors"
+            >
+              Emerald Hills
+            </a>
+          </h3>
+          <p className="opacity-80 card-body">
+            In the heart of Hollywood, FL—an intimate setting with beautiful views of the golf course.
+          </p>
+          <Slideshow
+            images={[
+              "/images/venues/emerald/Emerald1.jpg",
+              "/images/venues/emerald/Emerald2.jpg",
+              "/images/venues/emerald/Emerald3.jpg"
+            ]}
+            className="aspect-[4/3]"
+            label="Emerald Hills slideshow"
+          />
         </div>
       </div>
     </section>

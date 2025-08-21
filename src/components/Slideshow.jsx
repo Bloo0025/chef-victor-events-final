@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export default function Slideshow({ images = [], alt = 'gallery slide', className = '' }) {
+export default function Slideshow({ images = [], alt = 'gallery slide', className = '', label = 'Image slideshow' }) {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
@@ -12,7 +12,12 @@ export default function Slideshow({ images = [], alt = 'gallery slide', classNam
   if (!images.length) return null
 
   return (
-    <div className={`relative overflow-hidden rounded-2xl shadow ${className}`}>
+    <div
+      className={`relative overflow-hidden rounded-2xl shadow ${className}`}
+      role="region"
+      aria-label={label}
+      aria-live="polite"
+    >
       {images.map((src, i) => (
         <img
           key={src + i}
@@ -22,7 +27,7 @@ export default function Slideshow({ images = [], alt = 'gallery slide', classNam
           loading={i === index ? 'eager' : 'lazy'}
         />
       ))}
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1" aria-hidden="true">
         {images.map((_, i) => (
           <span key={i} className={`h-1.5 w-4 rounded-full ${i === index ? 'bg-navy' : 'bg-navy/30'}`}></span>
         ))}
