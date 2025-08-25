@@ -57,7 +57,14 @@
   }
 
   /* Comfortable reading rhythm for serif body */
-  body { @apply leading-relaxed md:leading-loose; }
+  body { 
+    @apply leading-relaxed md:leading-loose; 
+  }
+
+  /* Smooth anchor scrolling site‑wide */
+html {
+  scroll-behavior: smooth;
+}
 
   /* All headings use Relation Two Bold */
   h1, h2, h3, h4, h5, h6 {
@@ -76,11 +83,27 @@
 
   /* Optional: keep your script logo */
   .logo-script { font-family: "Brittany", cursive; }
+
+  /* 🔹 Global background color (brand cream) */
+  html, body, #root {
+    height: 100%;
+    background-color: #F3EDE0;
+  }
 }
 
 /* --- Components layer (add your custom component styles here) --- */
 @layer components {
+  /* Primary button (example, keep commented if not used) */
   /* .btn-primary { @apply bg-[#263B50] text-white rounded-2xl px-5 py-3 shadow-sm; } */
+
+  /* Card styling */
+  .card {
+    @apply bg-white rounded-2xl shadow-md p-6 flex flex-col space-y-4;
+  }
+
+  .card-body {
+    @apply text-base md:text-lg font-body leading-relaxed;
+  }
 }
 
 /* --- Utilities layer for one-off helpers (optional) --- */
